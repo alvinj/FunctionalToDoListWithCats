@@ -1,7 +1,7 @@
 
 # this script assumes that this file was already created
 # with sbt-assembly
-JAR_FILE=FPToDoList-assembly-0.1.jar
+JAR_FILE=FPToDoListWithCats-assembly-0.1.jar
 
 echo "copying JAR file ..."
 cp ../target/scala-2.12/${JAR_FILE} .
