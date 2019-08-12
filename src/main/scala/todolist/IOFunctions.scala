@@ -23,7 +23,7 @@ object IOFunctions {
      * -------------------------------------------------------------
      */
 
-     /**
+    /**
      * Use Cats `bracket`:
      * https://typelevel.org/cats-effect/tutorial/tutorial.html#what-about-bracket
      */
@@ -55,34 +55,34 @@ object IOFunctions {
 
 
     /**
-     * TWO IMPLEMENTATIONS OF `readFile` (`bracket` and `Resource`)
-     * ------------------------------------------------------------
-     */
+      * TWO IMPLEMENTATIONS OF `readFile` (`bracket` and `Resource`)
+      * ------------------------------------------------------------
+      */
 
     // `bracket`
-    // def readFile(filename: String): IO[Seq[String]] = {
-    //     // acquire
-    //     IO(Source.fromFile(filename)).bracket { source =>
-    //         // use
-    //         IO((for (line <- source.getLines) yield line).toVector)
-    //     } { source =>
-    //         // release
-    //         IO(source.close())
-    //     }
-    // }
+    def readFile(filename: String): IO[Seq[String]] = {
+        // acquire
+        IO(Source.fromFile(filename)).bracket { source =>
+            // use
+            IO((for (line <- source.getLines) yield line).toVector)
+        } { source =>
+            // release
+            IO(source.close())
+        }
+    }
     
     // `Resource`
-    def readFile(filename: String): IO[Seq[String]] = {
-        val acquire: IO[BufferedSource] = IO(Source.fromFile(filename))
-        Resource.fromAutoCloseable(acquire)
-            .use { source => 
-                IO {
-                    val lines = (for (line <- source.getLines) yield line).toVector
-                    IO(lines)
-                }
-            }
-            .unsafeRunSync()
-    }
+    // def readFile(filename: String): IO[Seq[String]] = {
+    //     val acquire: IO[BufferedSource] = IO(Source.fromFile(filename))
+    //     Resource.fromAutoCloseable(acquire)
+    //         .use { source => 
+    //             IO {
+    //                 val lines = (for (line <- source.getLines) yield line).toVector
+    //                 IO(lines)
+    //             }
+    //         }
+    //         .unsafeRunSync()
+    // }
     
 }
 
