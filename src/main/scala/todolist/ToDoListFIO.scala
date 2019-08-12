@@ -28,7 +28,7 @@ object ToDoListFIO extends App {
         _     <- IOFunctions.putStr(prompt)
         cmd   <- getLine.map(Command.parse _)
         _     <- if (cmd == Quit) {
-                     IO()
+                     IO.unit
                  } else {
                      processCommand(cmd).unsafeRunSync()
                      mainLoop  //note the recursion here
