@@ -30,6 +30,7 @@ object ToDoListFIO extends App {
         _     <- if (cmd == Quit) {
                      IO.unit
                  } else {
+                     //TODO why is `unsafeRunSync` needed here?
                      processCommand(cmd).unsafeRunSync()
                      mainLoop  //note the recursion here
                  }
