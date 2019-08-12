@@ -58,7 +58,7 @@ object ToDoListFIO extends App {
             help
         }
         case Unknown => {
-            putStrLn("Unknown (type 'h' for help)")
+            putStrLn("Unknown (type 'h' for help)\n")
         }
     }
 
