@@ -10,6 +10,11 @@ libraryDependencies ++= Seq(
    "com.propensive" %% "kaleidoscope" % "0.1.0"
 )
 
-scalacOptions += "-deprecation"
-
+scalacOptions ++= Seq(
+    "-deprecation",     //emit warning and location for usages of deprecated APIs
+    "-unchecked",       //enable additional warnings where generated code depends on assumptions
+    "-explaintypes",    //explain type errors in more detail
+    "-Ywarn-dead-code", //warn when dead code is identified
+    "-Xfatal-warnings"  //fail the compilation if there are any warnings
+)
 
